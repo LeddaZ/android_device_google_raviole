@@ -136,8 +136,7 @@ DEVICE_MANIFEST_FILE += \
 # Vibrator HAL
 PRODUCT_PRODUCT_PROPERTIES +=\
     ro.vendor.vibrator.hal.long.frequency.shift=15
-PRODUCT_VENDOR_PROPERTIES += \
-        vendor.powerhal.adpf.rate=11111111
+
 ACTUATOR_MODEL := luxshare_ict_081545
 
 # Voice packs for Text-To-Speech
@@ -174,12 +173,16 @@ PRODUCT_PROPERTY_OVERRIDES += ro.odm.build.media_performance_class=31
 # userdebug specific
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
     PRODUCT_COPY_FILES += \
-        device/google/gs101/init.hardware.wlc.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.$(PRODUCT_PLATFORM).wlc.rc
+        device/google/gs101/init.hardware.wlc.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.wlc.rc
 endif
 
 # Increment the SVN for any official public releases
 PRODUCT_VENDOR_PROPERTIES += \
-    ro.vendor.build.svn=24
+    ro.vendor.build.svn=26
+
+# Set support hide display cutout feature
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.support_hide_display_cutout=true
 
 # Hide cutout overlays
 PRODUCT_PACKAGES += \
@@ -225,3 +228,26 @@ PRODUCT_VENDOR_PROPERTIES += \
 
 # This device is shipped with 31 (Android S)
 PRODUCT_SHIPPING_API_LEVEL := 31
+
+# userdebug specific
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+# Bluetooth LE Audio Hardware offload
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.bluetooth.leaudio_offload.supported=true \
+    persist.bluetooth.leaudio_offload.disabled=true \
+    persist.bluetooth.le_audio_test=false
+endif
+
+# Device features
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
+
+# Dolby integration
+-include vendor/dolby/ds/dolby-buildspec.mk
+$(call inherit-product-if-exists, vendor/dolby/ds/dolby-product.mk)
+#  overwrite file coming from device/google/gs101/media_codecs_bo_c2.xml
+PRODUCT_COPY_FILES := \
+    device/google/raviole/media_codecs_dolby_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_c2.xml \
+    $(PRODUCT_COPY_FILES)
+
+PRODUCT_RESTRICT_VENDOR_FILES := false
