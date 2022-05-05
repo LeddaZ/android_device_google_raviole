@@ -152,8 +152,7 @@ DEVICE_MANIFEST_FILE += \
 # Vibrator HAL
 PRODUCT_PRODUCT_PROPERTIES +=\
     ro.vendor.vibrator.hal.long.frequency.shift=15
-PRODUCT_VENDOR_PROPERTIES += \
-    vendor.powerhal.adpf.rate=8333333
+
 ACTUATOR_MODEL := luxshare_ict_081545
 
 # Voice packs for Text-To-Speech
@@ -192,7 +191,7 @@ endif
 
 # Increment the SVN for any official public releases
 PRODUCT_VENDOR_PROPERTIES += \
-    ro.vendor.build.svn=25
+    ro.vendor.build.svn=26
 
 # Set support hide display cutout feature
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -206,6 +205,10 @@ PRODUCT_PACKAGES += \
 # Fingerprint antispoof property
 PRODUCT_PRODUCT_PROPERTIES +=\
     persist.vendor.fingerprint.disable.fake.override=none
+
+# Fingerprint HAL
+PRODUCT_VENDOR_PROPERTIES += \
+    persist.vendor.udfps.lhbm_controlled_in_hal_supported=true
 
 # Keyboard side padding in dp for portrait mode
 PRODUCT_PRODUCT_PROPERTIES += ro.com.google.ime.kb_pad_port_r=11
@@ -259,13 +262,3 @@ endif
 # Device features
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
-
-# Dolby integration
--include vendor/dolby/ds/dolby-buildspec.mk
-$(call inherit-product-if-exists, vendor/dolby/ds/dolby-product.mk)
-#  overwrite file coming from device/google/gs101/media_codecs_bo_c2.xml
-PRODUCT_COPY_FILES := \
-    device/google/raviole/media_codecs_dolby_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_c2.xml \
-    $(PRODUCT_COPY_FILES)
-
-PRODUCT_RESTRICT_VENDOR_FILES := false
