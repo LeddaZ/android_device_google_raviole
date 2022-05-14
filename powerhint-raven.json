@@ -255,9 +255,10 @@
       "Name": "FGPreferIdle",
       "Path": "/proc/vendor_sched/fg_prefer_idle",
       "Values": [
-        "0",
-        "1"
+        "1",
+        "0"
       ],
+      "DefaultIndex": 0,
       "ResetOnInit": true
     },
     {
@@ -475,6 +476,12 @@
       "Node": "SFUClampBoost",
       "Duration": 1000,
       "Value": "161"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "FGPreferIdle",
+      "Duration": 5000,
+      "Value": "1"
     },
     {
       "PowerHint": "LAUNCH",
@@ -866,6 +873,12 @@
       "Value": "4-7"
     },
     {
+      "PowerHint": "CAMERA_STREAMING_EXTREME",
+      "Node": "NPITaskPacking",
+      "Duration": 0,
+      "Value": "0"
+    },
+    {
       "PowerHint": "CAMERA_STREAMING_HIGH",
       "Node": "CPUUtilThreshold",
       "Duration": 0,
@@ -944,6 +957,12 @@
       "Value": "4-7"
     },
     {
+      "PowerHint": "CAMERA_STREAMING_HIGH",
+      "Node": "NPITaskPacking",
+      "Duration": 0,
+      "Value": "0"
+    },
+    {
       "PowerHint": "CAMERA_STREAMING_STANDARD",
       "Node": "CDPreferHighCap",
       "Duration": 0,
@@ -1008,6 +1027,12 @@
       "Node": "CDMidHighCpusetCpus",
       "Duration": 0,
       "Value": "4-7"
+    },
+    {
+      "PowerHint": "CAMERA_STREAMING_STANDARD",
+      "Node": "NPITaskPacking",
+      "Duration": 0,
+      "Value": "0"
     },
     {
       "PowerHint": "CAMERA_STREAMING_LOW",
@@ -1080,6 +1105,12 @@
       "Node": "CDMidHighCpusetCpus",
       "Duration": 0,
       "Value": "4-7"
+    },
+    {
+      "PowerHint": "CAMERA_STREAMING_LOW",
+      "Node": "NPITaskPacking",
+      "Duration": 0,
+      "Value": "0"
     },
     {
       "PowerHint": "FIXED_PERFORMANCE",
