@@ -86,9 +86,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bluetooth_power_limits_raven_jp.csv:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_power_limits_JP.csv
 
 
-# Bluetooth SAR test tool
+# Bluetooth Hal Extension test tools
 PRODUCT_PACKAGES_DEBUG += \
-    sar_test
+    sar_test \
+    hci_inject
 
 # WirelessCharger
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs101/device_framework_matrix_product_wireless.xml
@@ -151,7 +152,9 @@ DEVICE_MANIFEST_FILE += \
 
 # Vibrator HAL
 PRODUCT_PRODUCT_PROPERTIES +=\
-    ro.vendor.vibrator.hal.long.frequency.shift=15
+    ro.vendor.vibrator.hal.long.frequency.shift=15 \
+    ro.vendor.vibrator.hal.device.mass=0.21 \
+    ro.vendor.vibrator.hal.loc.coeff=2.5
 
 ACTUATOR_MODEL := luxshare_ict_081545
 
@@ -175,7 +178,7 @@ endif
 
 # Increment the SVN for any official public releases
 PRODUCT_VENDOR_PROPERTIES += \
-    ro.vendor.build.svn=28
+    ro.vendor.build.svn=29
 
 # Set support hide display cutout feature
 PRODUCT_PRODUCT_PROPERTIES += \
