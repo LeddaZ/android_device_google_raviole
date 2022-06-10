@@ -195,7 +195,9 @@ PRODUCT_PRODUCT_PROPERTIES +=\
 
 # Fingerprint HAL
 PRODUCT_VENDOR_PROPERTIES += \
-    persist.vendor.udfps.lhbm_controlled_in_hal_supported=true
+    persist.vendor.udfps.lhbm_controlled_in_hal_supported=true \
+    persist.vendor.udfps.als_feed_forward_supported=true
+
 
 # Keyboard side padding in dp for portrait mode
 PRODUCT_PRODUCT_PROPERTIES += ro.com.google.ime.kb_pad_port_r=11
@@ -225,6 +227,10 @@ PRODUCT_VENDOR_PROPERTIES += \
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
 	bt_vendor.conf
+
+# tetheroffload HAL
+PRODUCT_PACKAGES += \
+	vendor.samsung_slsi.hardware.tetheroffload@1.1-service
 
 # Override default distortion output gain according to UX experiments
 PRODUCT_PRODUCT_PROPERTIES += \
