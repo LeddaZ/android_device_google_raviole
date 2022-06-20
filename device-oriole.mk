@@ -165,7 +165,7 @@ endif
 
 # Increment the SVN for any official public releases
 PRODUCT_VENDOR_PROPERTIES += \
-    ro.vendor.build.svn=31
+    ro.vendor.build.svn=32
 
 # Set support hide display cutout feature
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -210,6 +210,10 @@ PRODUCT_VENDOR_PROPERTIES += \
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
 	bt_vendor.conf
+
+# tetheroffload HAL
+PRODUCT_PACKAGES += \
+	vendor.samsung_slsi.hardware.tetheroffload@1.1-service
 
 # Override default distortion output gain according to UX experiments
 PRODUCT_PRODUCT_PROPERTIES += \
