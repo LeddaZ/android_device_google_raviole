@@ -178,7 +178,7 @@ endif
 
 # Increment the SVN for any official public releases
 PRODUCT_VENDOR_PROPERTIES += \
-    ro.vendor.build.svn=31
+    ro.vendor.build.svn=32
 
 # Set support hide display cutout feature
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -205,7 +205,7 @@ PRODUCT_PRODUCT_PROPERTIES += ro.com.google.ime.kb_pad_port_l=11
 
 # DCK properties based on target
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.gms.dck.eligible_wcc=2
+    ro.gms.dck.eligible_wcc=3
 
 # SKU specific RROs
 PRODUCT_PACKAGES += \
