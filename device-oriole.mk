@@ -98,9 +98,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	device/google/raviole/media_profiles_oriole.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.vendor.camera.fixed_fps_range_boost=1
-
 # Display Config
 PRODUCT_COPY_FILES += \
 	device/google/raviole/oriole/display_golden_cal0.pb:$(TARGET_COPY_OUT_VENDOR)/etc/display_golden_cal0.pb \
@@ -168,7 +165,7 @@ endif
 
 # Increment the SVN for any official public releases
 PRODUCT_VENDOR_PROPERTIES += \
-    ro.vendor.build.svn=36
+    ro.vendor.build.svn=32
 
 # Set support hide display cutout feature
 PRODUCT_PRODUCT_PROPERTIES += \
