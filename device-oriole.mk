@@ -98,6 +98,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	device/google/raviole/media_profiles_oriole.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.camera.fixed_fps_range_boost=1
+
 # Display Config
 PRODUCT_COPY_FILES += \
 	device/google/raviole/oriole/display_golden_cal0.pb:$(TARGET_COPY_OUT_VENDOR)/etc/display_golden_cal0.pb \
@@ -165,7 +168,7 @@ endif
 
 # Increment the SVN for any official public releases
 PRODUCT_VENDOR_PROPERTIES += \
-    ro.vendor.build.svn=29
+    ro.vendor.build.svn=40
 
 # Set support hide display cutout feature
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -188,7 +191,9 @@ PRODUCT_PRODUCT_PROPERTIES +=\
 
 # Fingerprint HAL
 PRODUCT_VENDOR_PROPERTIES += \
-    persist.vendor.udfps.lhbm_controlled_in_hal_supported=true
+    persist.vendor.udfps.lhbm_controlled_in_hal_supported=true \
+    persist.vendor.udfps.als_feed_forward_supported=true
+
 
 # DCK properties based on target
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -208,6 +213,10 @@ PRODUCT_VENDOR_PROPERTIES += \
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
 	bt_vendor.conf
+
+# tetheroffload HAL
+PRODUCT_PACKAGES += \
+	vendor.samsung_slsi.hardware.tetheroffload@1.1-service
 
 # Override default distortion output gain according to UX experiments
 PRODUCT_PRODUCT_PROPERTIES += \
