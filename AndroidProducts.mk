@@ -19,7 +19,7 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/aosp_oriole_hwasan.mk \
     $(LOCAL_DIR)/aosp_oriole_pkvm.mk \
     $(LOCAL_DIR)/aosp_oriole_64.mk \
-    $(LOCAL_DIR)/aosp_oriole_16k.mk \
+    $(LOCAL_DIR)/aosp_oriole_16k_64.mk \
     $(LOCAL_DIR)/factory_oriole.mk \
     $(LOCAL_DIR)/aosp_raven.mk \
     $(LOCAL_DIR)/aosp_raven_hwasan.mk \
