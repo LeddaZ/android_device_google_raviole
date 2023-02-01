@@ -18,3 +18,4 @@ $(call inherit-product, device/google/raviole/aosp_oriole.mk)
 
 PRODUCT_NAME := aosp_oriole_16k_64
 PRODUCT_MODEL := AOSP on Oriole with !4k pages and support for only 64-bits libraries.
+TARGET_KERNEL_DIR := device/google/raviole-kernel/16k
