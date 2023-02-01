@@ -31,7 +31,9 @@ DEVICE_PACKAGE_OVERLAYS += device/google/raviole/oriole/overlay
 include device/google/raviole/audio/oriole/audio-tables.mk
 include device/google/gs101/device-shipping-common.mk
 include device/google/gs101/fingerprint/udfps_common.mk
+include device/google/gs101/telephony/pktrouter.mk
 include hardware/google/pixel/vibrator/cs40l25/device.mk
+include device/google/gs101/bluetooth/bluetooth.mk
 
 ifeq ($(filter factory_oriole, $(TARGET_PRODUCT)),)
 include device/google/gs101/fingerprint/udfps_shipping.mk
@@ -39,6 +41,8 @@ else
 include device/google/gs101/fingerprint/udfps_factory.mk
 endif
 
+# go/lyric-soong-variables
+$(call soong_config_set,lyric,camera_hardware,oriole)
 $(call soong_config_set,lyric,tuning_product,oriole)
 $(call soong_config_set,google3a_config,target_device,oriole)
 
@@ -58,15 +62,17 @@ PRODUCT_COPY_FILES += \
 # Thermal Config
 PRODUCT_COPY_FILES += \
 	device/google/raviole/thermal_info_config_oriole.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json \
+	device/google/raviole/thermal_info_config_charge_oriole.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config_charge.json \
 	device/google/raviole/thermal_info_config_oriole_WHI_A.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config_WHI_A.json
 
 # Power HAL config
 PRODUCT_COPY_FILES += \
-    device/google/raviole/powerhint-oriole.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+	device/google/raviole/powerhint-oriole.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
 
 # Bluetooth
 PRODUCT_PRODUCT_PROPERTIES += \
-    persist.bluetooth.a2dp_aac.vbr_supported=true
+    persist.bluetooth.a2dp_aac.vbr_supported=true \
+    persist.bluetooth.firmware.selection=BCM.hcd
 
 # Bluetooth Tx power caps for oriole
 PRODUCT_COPY_FILES += \
@@ -78,9 +84,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bluetooth_power_limits_GB7N6_EU.csv:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_power_limits_GB7N6_EU.csv
 
 
-# Bluetooth SAR test tool
+# Bluetooth Hal Extension test tools
 PRODUCT_PACKAGES_DEBUG += \
-    sar_test
+    sar_test \
+    hci_inject
 
 # WirelessCharger
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs101/device_framework_matrix_product_wireless.xml
@@ -94,6 +101,9 @@ PRODUCT_COPY_FILES += \
 # Camera
 PRODUCT_COPY_FILES += \
 	device/google/raviole/media_profiles_oriole.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.camera.fixed_fps_range_boost=1
 
 # Display Config
 PRODUCT_COPY_FILES += \
@@ -114,43 +124,29 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
 	NfcNci \
 	Tag \
-	android.hardware.nfc@1.2-service.st
+	android.hardware.nfc-service.st
 
 # SecureElement
 PRODUCT_PACKAGES += \
-	android.hardware.secure_element@1.2-service-gto
+	android.hardware.secure_element@1.2-service-gto \
+	android.hardware.secure_element@1.2-service-gto-ese2
 
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.se.omapi.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.ese.xml \
 	frameworks/native/data/etc/android.hardware.se.omapi.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.uicc.xml \
-        device/google/raviole/nfc/libse-gto-hal.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libse-gto-hal.conf
+	device/google/raviole/nfc/libse-gto-hal.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libse-gto-hal.conf \
+	device/google/raviole/nfc/libse-gto-hal2.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libse-gto-hal2.conf
 
 DEVICE_MANIFEST_FILE += \
-	device/google/raviole/nfc/manifest_nfc.xml \
 	device/google/raviole/nfc/manifest_se.xml
 
 # Vibrator HAL
 PRODUCT_PRODUCT_PROPERTIES +=\
-    ro.vendor.vibrator.hal.long.frequency.shift=15
-PRODUCT_VENDOR_PROPERTIES += \
-        vendor.powerhal.adpf.rate=11111111
-ACTUATOR_MODEL := luxshare_ict_081545
+    ro.vendor.vibrator.hal.long.frequency.shift=15 \
+    ro.vendor.vibrator.hal.device.mass=0.205 \
+    ro.vendor.vibrator.hal.loc.coeff=2.25
 
-# Voice packs for Text-To-Speech
-PRODUCT_COPY_FILES += \
-	device/google/raviole/tts/ja-jp/ja-jp-x-multi-darwinn-wavernn-r27.zvoice:product/tts/google/ja-jp/ja-jp-x-multi-darwinn-wavernn-r27.zvoice\
-	device/google/raviole/tts/ja-jp/ja-jp-x-multi-r27.zvoice:product/tts/google/ja-jp/ja-jp-x-multi-r27.zvoice\
-	device/google/raviole/tts/ja-jp/ja-jp-x-multi-wavernn-r27.zvoice:product/tts/google/ja-jp/ja-jp-x-multi-wavernn-r27.zvoice\
-	device/google/raviole/tts/fr-fr/fr-fr-x-multi-darwinn-wavernn-r27.zvoice:product/tts/google/fr-fr/fr-fr-x-multi-darwinn-wavernn-r27.zvoice\
-	device/google/raviole/tts/fr-fr/fr-fr-x-multi-r27.zvoice:product/tts/google/fr-fr/fr-fr-x-multi-r27.zvoice\
-	device/google/raviole/tts/fr-fr/fr-fr-x-multi-wavernn-r27.zvoice:product/tts/google/fr-fr/fr-fr-x-multi-wavernn-r27.zvoice\
-	device/google/raviole/tts/de-de/de-de-x-multi-darwinn-wavernn-r27.zvoice:product/tts/google/de-de/de-de-x-multi-darwinn-wavernn-r27.zvoice\
-	device/google/raviole/tts/de-de/de-de-x-multi-r27.zvoice:product/tts/google/de-de/de-de-x-multi-r27.zvoice\
-	device/google/raviole/tts/de-de/de-de-x-multi-wavernn-r27.zvoice:product/tts/google/de-de/de-de-x-multi-wavernn-r27.zvoice\
-	device/google/raviole/tts/it-it/it-it-x-multi-r24.zvoice:product/tts/google/it-it/it-it-x-multi-r24.zvoice\
-	device/google/raviole/tts/es-es/es-es-x-multi-darwinn-wavernn-r27.zvoice:product/tts/google/es-es/es-es-x-multi-darwinn-wavernn-r27.zvoice\
-	device/google/raviole/tts/es-es/es-es-x-multi-r27.zvoice:product/tts/google/es-es/es-es-x-multi-r27.zvoice\
-	device/google/raviole/tts/es-es/es-es-x-multi-wavernn-r27.zvoice:product/tts/google/es-es/es-es-x-multi-wavernn-r27.zvoice
+ACTUATOR_MODEL := luxshare_ict_081545
 
 # PowerStats HAL
 PRODUCT_SOONG_NAMESPACES += \
@@ -170,12 +166,16 @@ PRODUCT_PROPERTY_OVERRIDES += ro.odm.build.media_performance_class=31
 # userdebug specific
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
     PRODUCT_COPY_FILES += \
-        device/google/gs101/init.hardware.wlc.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.$(PRODUCT_PLATFORM).wlc.rc
+        device/google/gs101/init.hardware.wlc.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.wlc.rc
 endif
 
 # Increment the SVN for any official public releases
 PRODUCT_VENDOR_PROPERTIES += \
-    ro.vendor.build.svn=30
+    ro.vendor.build.svn=42
+
+# Set support hide display cutout feature
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.support_hide_display_cutout=true
 
 # Hide cutout overlays
 PRODUCT_PACKAGES += \
@@ -192,6 +192,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PRODUCT_PROPERTIES +=\
     persist.vendor.fingerprint.disable.fake.override=none
 
+# Fingerprint HAL
+PRODUCT_VENDOR_PROPERTIES += \
+    persist.vendor.udfps.lhbm_controlled_in_hal_supported=true \
+    persist.vendor.udfps.als_feed_forward_supported=true
+
+
 # DCK properties based on target
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.gms.dck.eligible_wcc=2
@@ -207,9 +213,24 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_VENDOR_PROPERTIES += \
     persist.vendor.camera.exif_reveal_make_model=true
 
+# Bluetooth HAL
+PRODUCT_PACKAGES += \
+	bt_vendor.conf
+PRODUCT_COPY_FILES += \
+	device/google/raviole/bluetooth/bt_vendor_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/bt_vendor_overlay.conf
+
+# tetheroffload HAL
+PRODUCT_PACKAGES += \
+	vendor.samsung_slsi.hardware.tetheroffload@1.1-service
+
 # Override default distortion output gain according to UX experiments
 PRODUCT_PRODUCT_PROPERTIES += \
     vendor.audio.hapticgenerator.distortion.output.gain=0.5
+
+# RKPD
+PRODUCT_PRODUCT_PROPERTIES += \
+    remote_provisioning.enable_rkpd=true \
+    remote_provisioning.hostname=remoteprovisioning.googleapis.com \
 
 # Set zram size
 PRODUCT_VENDOR_PROPERTIES += \
@@ -217,3 +238,41 @@ PRODUCT_VENDOR_PROPERTIES += \
 
 # This device is shipped with 31 (Android S)
 PRODUCT_SHIPPING_API_LEVEL := 31
+
+# userdebug specific
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+# Bluetooth LE Audio Hardware offload
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.bluetooth.leaudio_offload.supported=true \
+    persist.bluetooth.leaudio_offload.disabled=true \
+    persist.bluetooth.le_audio_test=false
+endif
+
+# declare use of spatial audio
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.audio.spatializer_enabled=true
+
+PRODUCT_PACKAGES += \
+	libspatialaudio
+
+# Device features
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
+
+# Dolby integration
+-include vendor/dolby/ds/dolby-buildspec.mk
+$(call inherit-product-if-exists, vendor/dolby/ds/dolby-product.mk)
+#  overwrite file coming from device/google/gs101/media_codecs_bo_c2.xml
+PRODUCT_COPY_FILES := \
+    device/google/raviole/media_codecs_dolby_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_c2.xml \
+    $(PRODUCT_COPY_FILES)
+
+PRODUCT_RESTRICT_VENDOR_FILES := false
+
+# Enable adpf cpu hint session for SurfaceFlinger
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    debug.sf.enable_adpf_cpu_hint=true
+
+# Bluetooth OPUS codec
+PRODUCT_PRODUCT_PROPERTIES += \
+    persist.bluetooth.opus.enabled=true
