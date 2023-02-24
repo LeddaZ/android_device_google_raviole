@@ -13,9 +13,10 @@
 # limitations under the License.
 
 BOARD_PREBUILT_VENDORIMAGE := vendor/google_devices/oriole/proprietary/vendor.img
-
 BOARD_PREBUILT_VENDOR_DLKMIMAGE := vendor/google_devices/oriole/proprietary/vendor_dlkm.img
+
 ifneq (,$(filter %_16k_64,$(TARGET_PRODUCT)))
+  BOARD_PREBUILT_VENDORIMAGE := vendor/google_devices/oriole/proprietary/16k/vendor.img
   BOARD_PREBUILT_VENDOR_DLKMIMAGE := vendor/google_devices/oriole/proprietary/16k/vendor_dlkm.img
 endif
 
