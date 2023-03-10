@@ -25,6 +25,7 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/aosp_raven_hwasan.mk \
     $(LOCAL_DIR)/aosp_raven_pkvm.mk \
     $(LOCAL_DIR)/aosp_raven_64.mk \
+    $(LOCAL_DIR)/aosp_raven_16k_64.mk \
     $(LOCAL_DIR)/factory_raven.mk \
     $(LOCAL_DIR)/aosp_slider.mk \
     $(LOCAL_DIR)/aosp_slider_hwasan.mk \
