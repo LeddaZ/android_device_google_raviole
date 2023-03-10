@@ -18,19 +18,6 @@ soong_namespace {
 cc_prebuilt_library_shared {
     name: "libmediaadaptor",
     arch: {
-        arm: {
-            srcs: ["libmediaadaptor.so"],
-            shared_libs: [
-                "libandroid_runtime",
-                "libbinder",
-                "libc++",
-                "liblog",
-                "libmedia",
-                "libnativehelper",
-                "libstagefright",
-                "libutils",
-            ],
-        },
         arm64: {
             srcs: ["lib64/libmediaadaptor.so"],
             shared_libs: [
