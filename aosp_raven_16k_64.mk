@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-$(call inherit-product, device/google/raviole/aosp_oriole.mk)
+$(call inherit-product, device/google/raviole/aosp_raven.mk)
 
 PRODUCT_NAME := aosp_raven_16k_64
 PRODUCT_MODEL := AOSP on Raven with !4k pages and support for only 64-bits libraries.
