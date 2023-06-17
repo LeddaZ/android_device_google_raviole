@@ -309,4 +309,8 @@
         <item>com.facebook.orca</item>
         <item>com.skype.raider</item>
     </string-array>
+
+
+    <!-- Fingerprint from stock ROM -->
+    <string name="config_stockFingerprint" translatable="false">google/raven/raven:13/TQ3A.230605.010/10121037:user/release-keys</string>
 </resources>
