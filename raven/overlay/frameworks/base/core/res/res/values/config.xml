@@ -310,7 +310,6 @@
         <item>com.skype.raider</item>
     </string-array>
 
-
     <!-- Fingerprint from stock ROM -->
-    <string name="config_stockFingerprint" translatable="false">google/raven/raven:13/TQ3A.230605.010/10121037:user/release-keys</string>
+    <string name="config_stockFingerprint" translatable="false">google/raven/raven:13/TQ3A.230805.001/10316531:user/release-keys</string>
 </resources>
