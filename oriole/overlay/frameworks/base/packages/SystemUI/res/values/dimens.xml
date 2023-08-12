@@ -33,8 +33,6 @@
     <!-- Margin on the right side of the system icon group on Keyguard. -->
     <dimen name="system_icons_keyguard_padding_end">4.5dp</dimen>
 
-    <dimen name="keyguard_carrier_text_margin">0px</dimen>
-
     <dimen name="config_rounded_mask_size">71px</dimen>
     <dimen name="config_rounded_mask_size_top">71px</dimen>
     <dimen name="config_rounded_mask_size_bottom">70px</dimen>
