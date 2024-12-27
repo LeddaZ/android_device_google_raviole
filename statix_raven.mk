@@ -18,6 +18,6 @@ PRODUCT_NAME := statix_raven
 PRODUCT_MODEL := Pixel 6 Pro
 PRODUCT_BRAND := google
 
-BUILD_FINGERPRINT := $(PRODUCT_OVERRIDE_FINGERPRINT)
-
-PRODUCT_BUILD_PROP_OVERRIDES += DeviceProduct=raven
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    BuildFingerprint=google/raven/raven:15/AP4A.241205.013/12621605:user/release-keys \
+    DeviceProduct=raven
