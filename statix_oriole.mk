@@ -14,7 +14,7 @@ $(call inherit-product-if-exists, vendor/google/pixelparts/pixelparts.mk)
 $(call inherit-product-if-exists, vendor/google/pixelparts/powershare/device.mk)
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_NAME := statix_oriole_64
+PRODUCT_NAME := statix_oriole
 PRODUCT_MODEL := Pixel 6
 PRODUCT_BRAND := google
 
